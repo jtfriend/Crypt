@@ -180,9 +180,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
         System.out.println("Break");
         
-        
-        
-        
     }
     
     
