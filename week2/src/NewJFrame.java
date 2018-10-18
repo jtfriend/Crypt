@@ -169,10 +169,6 @@ public class NewJFrame extends javax.swing.JFrame {
         IJ = generateIJ(PQR_sent);
         
         //calc ab
-        
-        
-
-        
         for (int i = 6; i < 10; i++) {
             if (d_s[i] == 10) {
                 text1 = "Unuseable number!";
@@ -191,11 +187,19 @@ public class NewJFrame extends javax.swing.JFrame {
                 error = "none";
             }
         }
-
+        
+        printArray(IJ);
+        System.out.println("Break");
+        printArray(PQR_sent);
+        
         String digits = "";
         
         for (int i = 0; i < 10; i++) {
             digits += d_s[i];
+        }
+        
+        for (int i = 0; i < 4; i++) {
+            digits += syndromes_sent[i];
         }
 
         jTextArea1.setText(error + " " + digits);
@@ -234,9 +238,9 @@ public class NewJFrame extends javax.swing.JFrame {
     public int[] generatePQR(int[] s){
         
         int[] PQRarr = new int [3];
-        int p = (s[1] ^ 2) - (s[0] * s[2]);
+        int p = (s[1] * s[1]) - (s[0] * s[2]);
         int q = (s[0] * s[3]) - (s[1] * s[2]);
-        int r = (s[2] ^ 2) - (s[0] * s[3]);
+        int r = (s[2] * s[2]) - (s[0] * s[3]);
         
         PQRarr[0] = p;
         PQRarr[1] = q;
@@ -260,6 +264,12 @@ public class NewJFrame extends javax.swing.JFrame {
 
        
         return IJ;
+    }
+    
+    public void printArray(int[] arr) {
+        for (int i = 0; i < (arr.length); i++) {
+            System.out.println(arr[i]);
+        }
     }
     
     
