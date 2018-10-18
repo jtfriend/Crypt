@@ -133,68 +133,69 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
     public void week2DigitWork() {
-        int[] d = new int [10];
-        int[] s = new int [4];
+        int[] d_r = new int [10];
+        int[] d_s = new int [10];
+        int[] syndromes_sent = new int [4];
+        int[] syndromes_received = new int [4];
+        int[] PQR_sent = new int [3];
+        int[] PQR_received = new int [3];
+        int[] IJ = new int [3];
         String sent_digits;
         sent_digits = jTextField1.getText();
         String recieved_digits;
         recieved_digits = jTextField2.getText();
         
         for (int i = 0; i < 10; i++) {
-            d[i] = 0;
+            d_r[i] = 0;
+            d_s[i] = 0;
         }
         
         for (int i = 0; i < 6; i++) {
-            d[i] = Integer.parseInt(String.valueOf(sent_digits.charAt(i)));
+            d_s[i] = Integer.parseInt(String.valueOf(sent_digits.charAt(i)));
+            d_r[i] = Integer.parseInt(String.valueOf(recieved_digits.charAt(i)));
         }
         
         String text1 = "";
         String error = "";
-        d = generateParity4digits(d);
+        d_s = generateParity4digits(d_s);
+        d_r = generateParity4digits(d_r);
+        
+        syndromes_sent = generateSyndromes4digits(d_s);
+        syndromes_received = generateSyndromes4digits(d_r);
+        
+        PQR_sent = generatePQR(syndromes_sent);
+        PQR_received = generatePQR(syndromes_received);
+        
+        IJ = generateIJ(PQR_sent);
+        
+        //calc ab
+        
+        
 
         
         for (int i = 6; i < 10; i++) {
-            if (d[i] == 10) {
+            if (d_s[i] == 10) {
                 text1 = "Unuseable number!";
             }
         }
-        //s1
-        s[0] = (d[0] + d[1] + d[2] + d[3] + d[4] + d[5] + d[6] + d[7] + d[8] + d[9]) 
-                % 11;
-        //s2
-        s[1] = (d[0] + (2 * d[1]) + (3* d[2]) + (4 * d[3]) + (5 * d[4]) +
-                (6* d[5]) + (7 * d[6]) + (8*d[7]) + (9*d[8]) + (10 * d[9])) % 11;
-        //s3
-        s[2] = (d[0] + (4 * d[1]) + (9*d[2])+ (5*d[3]) + (3 * d[4]) + (3* d[5]) +
-                (5*d[6]) + (9 * d[7]) + (4 * d[8]) + d[9]) % 11;
-        //s4
-        s[3] = (d[0] + (8*d[1]) + (5*d[2]) + (9*d[3]) + (4* d[4]) + (7*d[5]) + 
-                (2*d[6]) + (6 * d[7]) + (3 * d[8]) + (10*d[9])) % 11;
-        
-        int p = (s[1] ^ 2) - (s[0] * s[2]);
-        int q = (s[0] * s[3]) - (s[1] * s[2]);
-        int r = (s[2] ^ 2) - (s[0] * s[3]);
-        
   
         
-        if (p == 0 && q == 0 && r ==0 ){
+        if (PQR_sent[0] == 0 && PQR_sent[1] == 0 && PQR_sent[2] == 0 ){
             error = "single";
         } else {
             error = "double";
         }
         
         for (int i = 0; i < 4; i++) {
-            if (s[i] == 0){
+            if (syndromes_sent[i] == 0){
                 error = "none";
             }
         }
- 
-        
 
         String digits = "";
         
         for (int i = 0; i < 10; i++) {
-            digits += d[i];
+            digits += d_s[i];
         }
 
         jTextArea1.setText(error + " " + digits);
@@ -209,6 +210,73 @@ public class NewJFrame extends javax.swing.JFrame {
 
         return d;
     }
+    
+    public int[] generateSyndromes4digits(int[] d){
+        
+        int[] s = new int [4];
+        
+        //s1
+        s[0] = (d[0] + d[1] + d[2] + d[3] + d[4] + d[5] + d[6] + d[7] + d[8] + d[9]) 
+                % 11;
+        //s2
+        s[1] = (d[0] + (2 * d[1]) + (3* d[2]) + (4 * d[3]) + (5 * d[4]) +
+                (6* d[5]) + (7 * d[6]) + (8*d[7]) + (9*d[8]) + (10 * d[9])) % 11;
+        //s3
+        s[2] = (d[0] + (4 * d[1]) + (9*d[2])+ (5*d[3]) + (3 * d[4]) + (3* d[5]) +
+                (5*d[6]) + (9 * d[7]) + (4 * d[8]) + d[9]) % 11;
+        //s4
+        s[3] = (d[0] + (8*d[1]) + (5*d[2]) + (9*d[3]) + (4* d[4]) + (7*d[5]) + 
+                (2*d[6]) + (6 * d[7]) + (3 * d[8]) + (10*d[9])) % 11;
+
+        return s;
+    }
+    
+    public int[] generatePQR(int[] s){
+        
+        int[] PQRarr = new int [3];
+        int p = (s[1] ^ 2) - (s[0] * s[2]);
+        int q = (s[0] * s[3]) - (s[1] * s[2]);
+        int r = (s[2] ^ 2) - (s[0] * s[3]);
+        
+        PQRarr[0] = p;
+        PQRarr[1] = q;
+        PQRarr[2] = r;
+       
+        return PQRarr;
+    }
+    
+    public int[] generateIJ(int[] PQR){
+        
+        int[] IJ = new int [2];
+        int p = PQR[0];
+        int q = PQR[1];
+        int r = PQR[2];
+        
+        int i = -q + squareroot((q*q) - (4 * p * r)) / 2 * p;
+        int j = -q - squareroot((q*q) - (4 * p * r)) / 2 * p;
+        
+        IJ[0] = i;
+        IJ[1] = j;
+
+       
+        return IJ;
+    }
+    
+    
+    public int squareroot(int val){
+        int testVal = 0;
+        int sqrtdVal = 0;
+        
+        for (int i = 0; i< 10; i++) {
+            testVal = i*i;
+            if (testVal % 11 == val) {
+                return testVal;
+            }
+        }
+        
+        return -1;
+    }
+    
     
     /**
      * @param args the command line arguments
