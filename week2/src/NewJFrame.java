@@ -35,8 +35,18 @@ public class NewJFrame extends javax.swing.JFrame {
         label2 = new java.awt.Label();
         label3 = new java.awt.Label();
         jTextField2 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTextField1.setText("3745195876");
+
+        jScrollPane1.setHorizontalScrollBar(null);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -61,12 +71,30 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        label1.setText("Sent Code");
+        label1.setText("Expected Code");
 
         label2.setName(""); // NOI18N
         label2.setText("Recieving Code");
 
         label3.setText("Output");
+
+        jScrollPane2.setHorizontalScrollBar(null);
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane2.setViewportView(jTextArea2);
+
+        jScrollPane3.setHorizontalScrollBar(null);
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane3.setViewportView(jTextArea3);
+
+        jScrollPane4.setHorizontalScrollBar(null);
+
+        jTextArea4.setColumns(20);
+        jTextArea4.setRows(5);
+        jScrollPane4.setViewportView(jTextArea4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,7 +113,10 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(140, 140, 140)
                         .addComponent(jButton3)))
@@ -100,18 +131,30 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
                         .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(64, 64, 64)
+                        .addGap(10, 10, 10)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -135,11 +178,9 @@ public class NewJFrame extends javax.swing.JFrame {
     public void week2DigitWork() {
         int[] d_r = new int [10];
         int[] d_s = new int [10];
-        int[] syndromes_sent = new int [4];
-        int[] syndromes_received = new int [4];
-        int[] PQR_sent = new int [3];
-        int[] PQR_received = new int [3];
-        int[] IJ = new int [3];
+        int[] syndromes = new int [4];
+        int[] PQR = new int [3];
+        int[] IJAB = new int [4];
         String sent_digits;
         sent_digits = jTextField1.getText();
         String recieved_digits;
@@ -150,59 +191,77 @@ public class NewJFrame extends javax.swing.JFrame {
             d_s[i] = 0;
         }
         
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 10; i++) {
             d_s[i] = Integer.parseInt(String.valueOf(sent_digits.charAt(i)));
             d_r[i] = Integer.parseInt(String.valueOf(recieved_digits.charAt(i)));
         }
         
+        
+        String pqr = "";
         String text1 = "";
         String error = "";
-        d_s = generateParity4digits(d_s);
-        d_r = generateParity4digits(d_r);
+        String ijab = "";
+//        d_s = generateParity4digits(d_s);
+//        d_r = generateParity4digits(d_r);
         
-        syndromes_sent = generateSyndromes4digits(d_s);
-        syndromes_received = generateSyndromes4digits(d_r);
+//        syndromes_sent = generateSyndromes4digits(d_s);
+        syndromes = generateSyndromes4digits(d_r);
         
-        PQR_sent = generatePQR(syndromes_sent);
-        PQR_received = generatePQR(syndromes_received);
+//        PQR_sent = generatePQR(syndromes_sent);
+        PQR = generatePQR(syndromes);
         
-        IJ = generateIJ(PQR_sent);
+
         
-        //calc ab
+        if (PQR[0] == 0 && PQR[1] == 0 && PQR[2] == 0 ){
+            error = "Single";
+            IJAB[0] = syndromes[1] / (syndromes[0] == 0 ? 1: syndromes[0]);
+            IJAB[2] = syndromes[0];
+        } else {
+            error = "Double";
+            IJAB = generateIJAB(PQR, syndromes);
+            if (checkForThreeErrors(PQR, IJAB, d_r) == 1){
+                error = "Triple";
+            }
+        }
+        
+
+        
         for (int i = 6; i < 10; i++) {
             if (d_s[i] == 10) {
                 text1 = "Unuseable number!";
             }
         }
-  
         
-        if (PQR_sent[0] == 0 && PQR_sent[1] == 0 && PQR_sent[2] == 0 ){
-            error = "single";
-        } else {
-            error = "double";
+        if (syndromes[0] == 0 && syndromes[1] == 0 && syndromes[2] == 0 && syndromes[3] == 0 ){
+            error = "None";
         }
         
-        for (int i = 0; i < 4; i++) {
-            if (syndromes_sent[i] == 0){
-                error = "none";
-            }
-        }
-        
-        printArray(IJ);
+        printArray(IJAB);
         System.out.println("Break");
-        printArray(PQR_sent);
+        printArray(PQR);
         
         String digits = "";
         
-        for (int i = 0; i < 10; i++) {
-            digits += d_s[i];
+        for (int i = 0; i < 4; i++) {
+            digits += syndromes[i];
+            digits += ", ";
+        }
+        
+        for (int i = 0; i < 3; i++) {
+            pqr += PQR[i];
+            pqr += ", ";
         }
         
         for (int i = 0; i < 4; i++) {
-            digits += syndromes_sent[i];
+            ijab += IJAB[i];
+            ijab += ", ";
         }
 
-        jTextArea1.setText(error + " " + digits);
+        jTextArea1.setText(error);
+        jTextArea2.setText(digits);
+        jTextArea3.setText(pqr);
+        jTextArea4.setText(ijab);
+        
 
         System.out.println("Break");
     }
@@ -238,9 +297,9 @@ public class NewJFrame extends javax.swing.JFrame {
     public int[] generatePQR(int[] s){
         
         int[] PQRarr = new int [3];
-        int p = (s[1] * s[1]) - (s[0] * s[2]);
-        int q = (s[0] * s[3]) - (s[1] * s[2]);
-        int r = (s[2] * s[2]) - (s[0] * s[3]);
+        int p = mod11fix((s[1] * s[1]) - (s[0] * s[2]));
+        int q = mod11fix((s[0] * s[3]) - (s[1] * s[2]));
+        int r = mod11fix((s[2] * s[2]) - (s[1] * s[3]));
         
         PQRarr[0] = p;
         PQRarr[1] = q;
@@ -249,21 +308,64 @@ public class NewJFrame extends javax.swing.JFrame {
         return PQRarr;
     }
     
-    public int[] generateIJ(int[] PQR){
+    public int mod11fix(int val) {
+        System.out.println("b4modfix");
+        System.out.println(val);
+        System.out.println("::");
+        while (val < 0) {
+            val = val + 11;
+        }
+        val = val % 11;
+        System.out.println("modfix");
+        System.out.println(val);
+        System.out.println("::");
+        return val;
+    }
+    
+    public int modDivision(int val) {
+        int testVal = 0;
+        for (int i = 0; i< 11; i++) {
+            testVal = val * i;
+            
+            if (testVal % 11 == 1) {
+                System.out.println("division success!!!");
+                System.out.println(i);
+                return i;
+            }
+        }
+        System.out.println("Division fail!");
+        return 0;
+    }
+    
+    public int[] generateIJAB(int[] PQR, int[] s){
         
-        int[] IJ = new int [2];
+        int[] IJAB = new int [4];
         int p = PQR[0];
         int q = PQR[1];
         int r = PQR[2];
+ 
+        int firstPiece = q;
+        int secondPiece = squareroot(mod11fix((q*q) - (4 * p * r)));
+        int lastPiece = mod11fix(2 * p);
+        int i = mod11fix( -firstPiece + secondPiece) * modDivision(lastPiece);
+        int j = mod11fix( -firstPiece - secondPiece) * modDivision(lastPiece);
         
-        int i = -q + squareroot((q*q) - (4 * p * r)) / 2 * p;
-        int j = -q - squareroot((q*q) - (4 * p * r)) / 2 * p;
-        
-        IJ[0] = i;
-        IJ[1] = j;
+        int b = ((mod11fix(i * s[0])) - s[1]) * modDivision(mod11fix(i - j));
+        int a = s[0] - b;
 
+
+//        int i = (-q + (squareroot(mod11fix((q*q) - (4 * p * r))))) / (2 * p);
+//        int j = (-q - (squareroot(mod11fix((q*q) - (4 * p * r))))) / (2 * p);
+
+        IJAB[0] = mod11fix(i);
+        IJAB[1] = mod11fix(j);
+        IJAB[2] = mod11fix(a);
+        IJAB[3] = mod11fix(b);
+        System.out.println("IJ");
+        printArray(IJAB);
+        System.out.println("::");
        
-        return IJ;
+        return IJAB;
     }
     
     public void printArray(int[] arr) {
@@ -272,18 +374,37 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }
     
+    public int checkForThreeErrors(int[] PQR, int[] IJAB, int[] d_r) {
+        int p = PQR[0];
+        int q = PQR[1];
+        int r = PQR[2];
+        
+        if (squareroot(mod11fix((q*q) - (4 * p * r))) == -1) {
+            System.out.println("three - sqrt");
+            return 1;
+            
+        }
+        if (IJAB[0] == 0 || IJAB[1] == 0){
+            System.out.println("three - ij = 0");
+            return 1;
+        }
+        
+        return 0;
+    }
+    
     
     public int squareroot(int val){
         int testVal = 0;
-        int sqrtdVal = 0;
         
-        for (int i = 0; i< 10; i++) {
+        for (int i = 0; i< 20; i++) {
             testVal = i*i;
             if (testVal % 11 == val) {
-                return testVal;
+                System.out.println("square root success!!!");
+                System.out.println(i);
+                return i;
             }
         }
-        
+        System.out.println("square root fail!");
         return -1;
     }
     
@@ -328,7 +449,13 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private java.awt.Label label1;
