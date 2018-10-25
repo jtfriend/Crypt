@@ -235,10 +235,10 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }
         
-        fixedCode = fixCode(d_r, IJAB);
-        
         if (syndromes[0] == 0 && syndromes[1] == 0 && syndromes[2] == 0 && syndromes[3] == 0 ){
             error = "None";
+        } else {
+            fixedCode = fixCode(d_r, IJAB);
         }
         
         for (int i = 0; i < 4; i++) {
@@ -337,9 +337,16 @@ public class NewJFrame extends javax.swing.JFrame {
         int pos_2 = IJAB[1];
         int mag_1 = IJAB[2];
         int mag_2 = IJAB[3];
+        
+        printArray(IJAB);
+        
+        if (pos_1 > 0) {
+            originalCode[pos_1-1] = mod11fix(originalCode[pos_1-1]- mag_1);
+        }
 
-        originalCode[pos_1-1] = mod11fix(originalCode[pos_1-1]- mag_1);
-        originalCode[pos_2-1] = mod11fix(originalCode[pos_2-1]- mag_2);
+        if (pos_2 > 0) {
+            originalCode[pos_2-1] = mod11fix(originalCode[pos_2-1]- mag_2);
+        }
         
         return originalCode;
     }
@@ -386,6 +393,10 @@ public class NewJFrame extends javax.swing.JFrame {
         if (IJAB[0] == 0 || IJAB[1] == 0){
             return 1;
         }
+        
+        if ((fixCode(d_r, IJAB)).length > d_r.length){
+            return 1;
+        } 
         
         return 0;
     }
