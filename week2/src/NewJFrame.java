@@ -338,14 +338,19 @@ public class NewJFrame extends javax.swing.JFrame {
         int mag_1 = IJAB[2];
         int mag_2 = IJAB[3];
         
-        printArray(IJAB);
+//        printArray(IJAB);
+        
+        System.out.println("i:");
+        System.out.println(originalCode[pos_1 - 1]);
+        System.out.println("a:");
+        System.out.println(mag_1);
         
         if (pos_1 > 0) {
-            originalCode[pos_1-1] = mod11fix(originalCode[pos_1-1]- mag_1);
+            originalCode[pos_1 - 1] = mod11fix(originalCode[pos_1 - 1] - mag_1);
         }
 
         if (pos_2 > 0) {
-            originalCode[pos_2-1] = mod11fix(originalCode[pos_2-1]- mag_2);
+            originalCode[pos_2 - 1] = mod11fix(originalCode[pos_2 - 1] - mag_2);
         }
         
         return originalCode;
@@ -394,9 +399,9 @@ public class NewJFrame extends javax.swing.JFrame {
             return 1;
         }
         
-        if ((fixCode(d_r, IJAB)).length > d_r.length){
-            return 1;
-        } 
+//        if ((fixCode(d_r, IJAB)).length > d_r.length){
+//            return 1;
+//        } 
         
         return 0;
     }
