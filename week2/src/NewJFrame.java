@@ -239,6 +239,11 @@ public class NewJFrame extends javax.swing.JFrame {
             error = "None";
         } else {
             fixedCode = fixCode(d_r, IJAB);
+            for (int i = 0; i < fixedCode.length; i++) {
+                if (fixedCode[i] > 9) {
+                    error = "Triple";
+                }
+            }
         }
         
         for (int i = 0; i < 4; i++) {
@@ -340,10 +345,10 @@ public class NewJFrame extends javax.swing.JFrame {
         
 //        printArray(IJAB);
         
-        System.out.println("i:");
-        System.out.println(originalCode[pos_1 - 1]);
-        System.out.println("a:");
-        System.out.println(mag_1);
+//        System.out.println("i:");
+//        System.out.println(originalCode[pos_1 - 1]);
+//        System.out.println("a:");
+//        System.out.println(mag_1);
         
         if (pos_1 > 0) {
             originalCode[pos_1 - 1] = mod11fix(originalCode[pos_1 - 1] - mag_1);
