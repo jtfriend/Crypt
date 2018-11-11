@@ -202,6 +202,7 @@ public class NewJFrame extends javax.swing.JFrame {
         int[] syndromes = new int [4];
         int[] PQR = new int [3];
         int[] IJAB = new int [4];
+        int errorCount = 0;
 
         String recieved_digits;
         recieved_digits = jTextField2.getText();
@@ -222,6 +223,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
         syndromes = generateSyndromes4digits(d_r);
         PQR = generatePQR(syndromes);
+        
+        countErrors(syndromes, PQR, IJAB);
+
         
         if (PQR[0] == 0 && PQR[1] == 0 && PQR[2] == 0 ){
             error = "Single";
@@ -270,6 +274,26 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextArea3.setText(pqr);
         jTextArea4.setText(ijab);
         jTextArea5.setText(fixedCodeStr);
+    }
+    
+    public int countErrors(int[] s, int[] PQR, int[] IJAB) {
+        int errorCount = 0;
+        if (s[0] == 0 && s[1] == 0 && s[2] == 0 && s[3] == 0 ){
+            errorCount = 0;
+            return errorCount;
+        }
+        if (PQR[0] == 0 && PQR[1] == 0 && PQR[2] == 0 ){
+            errorCount = 1;
+        } else {
+            errorCount = 2;
+            IJAB = generateIJAB(PQR, s);
+            if (checkForThreeErrors(PQR, IJAB, d_r) == 1){
+                errorCount = 3;
+            }
+        }
+
+
+        return errorCount;
     }
 
     public int[] generateParity4digits(int[] d){
@@ -367,20 +391,25 @@ public class NewJFrame extends javax.swing.JFrame {
         int p = PQR[0];
         int q = PQR[1];
         int r = PQR[2];
- 
-        int firstPiece = q;
-        int secondPiece = squareroot(mod11fix((q*q) - (4 * p * r)));
-        int lastPiece = mod11fix(2 * p);
-        int i = mod11fix( -firstPiece + secondPiece) * modDivision(lastPiece);
-        int j = mod11fix( -firstPiece - secondPiece) * modDivision(lastPiece);
         
-        int b = ((mod11fix(i * s[0])) - s[1]) * modDivision(mod11fix(i - j));
-        int a = s[0] - b;
+        if (p == 0 && q == 0 && r == 0) {
+            IJAB[0] = s[1] / (s[0] == 0 ? 1: s[0]);
+            IJAB[2] = s[0];
+        } else {
+            int firstPiece = q;
+            int secondPiece = squareroot(mod11fix((q*q) - (4 * p * r)));
+            int lastPiece = mod11fix(2 * p);
+            int i = mod11fix( -firstPiece + secondPiece) * modDivision(lastPiece);
+            int j = mod11fix( -firstPiece - secondPiece) * modDivision(lastPiece);
 
-        IJAB[0] = mod11fix(i);
-        IJAB[1] = mod11fix(j);
-        IJAB[2] = mod11fix(a);
-        IJAB[3] = mod11fix(b);
+            int b = ((mod11fix(i * s[0])) - s[1]) * modDivision(mod11fix(i - j));
+            int a = s[0] - b;
+
+            IJAB[0] = mod11fix(i);
+            IJAB[1] = mod11fix(j);
+            IJAB[2] = mod11fix(a);
+            IJAB[3] = mod11fix(b);
+        }
        
         return IJAB;
     }
@@ -403,10 +432,6 @@ public class NewJFrame extends javax.swing.JFrame {
         if (IJAB[0] == 0 || IJAB[1] == 0){
             return 1;
         }
-        
-//        if ((fixCode(d_r, IJAB)).length > d_r.length){
-//            return 1;
-//        } 
         
         return 0;
     }

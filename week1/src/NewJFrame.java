@@ -103,8 +103,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-//        ISBNchecker();
           CreditCardChecker();
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -121,7 +119,7 @@ public class NewJFrame extends javax.swing.JFrame {
             d[i] = Integer.parseInt(String.valueOf(s.charAt(i)));
         }
         
-        String text1 = "test";
+        String text1 = "";
         int j = 0;
         int total = 0;
 
@@ -148,10 +146,7 @@ public class NewJFrame extends javax.swing.JFrame {
             digits += d[i];
         }
 
-        jTextArea1.setText(text1 + " " + digits);
-
-        System.out.println("Break");
-        
+        jTextArea1.setText(text1 + " " + digits);        
     }
     
     
