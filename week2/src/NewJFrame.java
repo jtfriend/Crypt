@@ -216,36 +216,22 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         
         String pqr = "";
-        String error = "";
         String ijab = "";
         String fixedCodeStr = "";
         String digits = "";
 
         syndromes = generateSyndromes4digits(d_r);
         PQR = generatePQR(syndromes);
+        IJAB = generateIJAB(PQR, syndromes);
         
-        countErrors(syndromes, PQR, IJAB);
+        errorCount = countErrors(syndromes, PQR, IJAB, d_r);
 
-        
-        if (PQR[0] == 0 && PQR[1] == 0 && PQR[2] == 0 ){
-            error = "Single";
-            IJAB[0] = syndromes[1] / (syndromes[0] == 0 ? 1: syndromes[0]);
-            IJAB[2] = syndromes[0];
-        } else {
-            error = "Double";
-            IJAB = generateIJAB(PQR, syndromes);
-            if (checkForThreeErrors(PQR, IJAB, d_r) == 1){
-                error = "Triple";
-            }
-        }
-        
-        if (syndromes[0] == 0 && syndromes[1] == 0 && syndromes[2] == 0 && syndromes[3] == 0 ){
-            error = "None";
+        if (errorCount == 0){
         } else {
             fixedCode = fixCode(d_r, IJAB);
             for (int i = 0; i < fixedCode.length; i++) {
                 if (fixedCode[i] > 9) {
-                    error = "Triple";
+                    errorCount = 3;
                 }
             }
         }
@@ -269,26 +255,27 @@ public class NewJFrame extends javax.swing.JFrame {
             fixedCodeStr += fixedCode[i];
         }
 
-        jTextArea1.setText(error);
+        jTextArea1.setText(Integer.toString(errorCount));
         jTextArea2.setText(digits);
         jTextArea3.setText(pqr);
         jTextArea4.setText(ijab);
         jTextArea5.setText(fixedCodeStr);
     }
     
-    public int countErrors(int[] s, int[] PQR, int[] IJAB) {
+    public int countErrors(int[] s, int[] PQR, int[] IJAB, int[] d_r) {
         int errorCount = 0;
         if (s[0] == 0 && s[1] == 0 && s[2] == 0 && s[3] == 0 ){
             errorCount = 0;
             return errorCount;
         }
-        if (PQR[0] == 0 && PQR[1] == 0 && PQR[2] == 0 ){
+        if (PQR[0] == 0 && PQR[1] == 0 && PQR[2] == 0){
             errorCount = 1;
         } else {
-            errorCount = 2;
-            IJAB = generateIJAB(PQR, s);
+
             if (checkForThreeErrors(PQR, IJAB, d_r) == 1){
                 errorCount = 3;
+            } else {
+                errorCount = 2;
             }
         }
 
