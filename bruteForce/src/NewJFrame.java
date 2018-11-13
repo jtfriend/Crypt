@@ -178,6 +178,36 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         return "Failed";
     }
+            
+        // a variable to remember the start time,  use the following methods 
+long timer = 0;
+
+void timeStart() {
+        timer = System.currentTimeMillis();
+}
+
+void timeStop(String s) {
+        timer = System.currentTimeMillis() - timer;
+        if(s.equals("showMs") || s.equals("")) 
+            System.out.println("Time taken is " + timer + "  milliseconds");
+        else if(s.equals("showSec"))
+            System.out.println("Time taken is " + timer/1000 + " seconds");
+        else if(s.equals("showMin")) {
+            System.out.println("Time taken is " + timer/60000 + " munites and "
+                    + (timer%60000)/1000 + " seconds");
+        }
+ }    
+ 
+/******  an example ***** 
+
+timeStart();
+do something
+timeStop("showSec");
+
+************************/
+
+        
+        
     
     public String genHash(String possiblePass) {
         String hold = "";
