@@ -113,7 +113,24 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        jTextArea1.setText(bruteForceAlgo(jTextField1.getText()));
+        String s[] =  {"b47f363e2b430c0647f14deea3eced9b0ef300ce",
+                      "b47f363e2b430c0647f14deea3eced9b0ef300ce",
+                      "e74295bfc2ed0b52d40073e8ebad555100df1380",
+                      "0f7d0d088b6ea936fb25b477722d734706fe8b40",
+                      "77cfc481d3e76b543daf39e7f9bf86be2e664959",
+                      "5cc48a1da13ad8cef1f5fad70ead8362aabc68a1",
+                      "4bcc3a95bdd9a11b28883290b03086e82af90212",
+                      "7302ba343c5ef19004df7489794a0adaee68d285",
+                      "21e7133508c40bbdf2be8a7bdc35b7de0b618ae4",
+                      "6ef80072f39071d4118a6e7890e209d4dd07e504",
+                      "02285af8f969dc5c7b12be72fbce858997afe80a",
+                      "57864da96344366865dd7cade69467d811a7961b"};
+        
+        for(int i = 0; i < 13; i++) {
+            timeStart();
+            jTextArea1.append(bruteForceAlgo(s[i]));
+            timeStop("showSec");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -180,31 +197,31 @@ public class NewJFrame extends javax.swing.JFrame {
     }
             
         // a variable to remember the start time,  use the following methods 
-long timer = 0;
+    long timer = 0;
 
-void timeStart() {
-        timer = System.currentTimeMillis();
-}
+    void timeStart() {
+            timer = System.currentTimeMillis();
+    }
 
-void timeStop(String s) {
-        timer = System.currentTimeMillis() - timer;
-        if(s.equals("showMs") || s.equals("")) 
-            System.out.println("Time taken is " + timer + "  milliseconds");
-        else if(s.equals("showSec"))
-            System.out.println("Time taken is " + timer/1000 + " seconds");
-        else if(s.equals("showMin")) {
-            System.out.println("Time taken is " + timer/60000 + " munites and "
-                    + (timer%60000)/1000 + " seconds");
-        }
- }    
- 
-/******  an example ***** 
+    void timeStop(String s) {
+            timer = System.currentTimeMillis() - timer;
+            if(s.equals("showMs") || s.equals("")) 
+                System.out.println("Time taken is " + timer + "  milliseconds");
+            else if(s.equals("showSec"))
+                jTextArea1.append("Time taken is " + timer/1000 + " seconds\n");
+            else if(s.equals("showMin")) {
+                System.out.println("Time taken is " + timer/60000 + " munites and "
+                        + (timer%60000)/1000 + " seconds");
+            }
+     }    
 
-timeStart();
-do something
-timeStop("showSec");
+    /******  an example ***** 
 
-************************/
+    timeStart();
+    do something
+    timeStop("showSec");
+
+    ************************/
 
         
         
