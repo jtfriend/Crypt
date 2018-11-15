@@ -124,20 +124,30 @@ public class NewJFrame extends javax.swing.JFrame {
     }
     
     public double fermatFactorise(int val) {
-        jTextArea1.setText(String.valueOf((int)(Math.sqrt(val))));
+        jTextArea1.append(String.valueOf(val) + " = ");
         int a = (int)(Math.sqrt(val)) + 1;
+        System.out.println("starting ^2 " + a);
         double possA = 0;
-        for (int i= 0; i < 50; i++){
+        double x = 0;
+        int i;
+        for (i= 0; i < 100000; i++){
+            System.out.println("a: " + a); 
+            System.out.println("diff" + ((a*a) - val));
             possA = Math.sqrt((a*a) - val);
-            double x = Math.floor(possA);
-            System.out.println(possA - x);
+            x = Math.floor(possA);
+            System.out.println("possA" + possA);
             if (possA - x == 0) {
+                System.out.println("found");
                 break;
+            } else {
+                System.out.println("not found");
             }
             a++;
         }
-        jTextArea1.append("\n");
-        jTextArea1.append(String.valueOf(possA));
+        int factorA = a - (int)possA;
+        int factorB = a + (int)possA;
+        jTextArea1.append(String.valueOf(factorA) + " x " + String.valueOf(factorB) + "\n");
+        
         return possA;
         //need to make struct to store a and possA;
     }
