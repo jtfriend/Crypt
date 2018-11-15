@@ -38,7 +38,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton1.setText("Verify1");
+        jButton1.setText("Verify");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -73,7 +73,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGap(195, 195, 195)
                         .addComponent(jButton3)
-                        .addContainerGap(52, Short.MAX_VALUE))))
+                        .addContainerGap(58, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

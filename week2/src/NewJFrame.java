@@ -279,7 +279,6 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }
 
-
         return errorCount;
     }
 
