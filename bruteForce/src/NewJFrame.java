@@ -127,20 +127,20 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-//        String s[] =  {"c2543fff3bfa6f144c2f06a7de6cd10c0b650cae"} this 311 seconds
-//        String s[] =  {"b47f363e2b430c0647f14deea3eced9b0ef300ce"}; is 0 seconds
-//        String s[] =  {"e74295bfc2ed0b52d40073e8ebad555100df1380"}; very 316 seconds
-//        String s[] =  {"0f7d0d088b6ea936fb25b477722d734706fe8b40"}; a while
-        String s[] =  {"77cfc481d3e76b543daf39e7f9bf86be2e664959"};
-//        String s[] =  {"5cc48a1da13ad8cef1f5fad70ead8362aabc68a1"};
-//        String s[] =  {"4bcc3a95bdd9a11b28883290b03086e82af90212"};
-//        String s[] =  {"7302ba343c5ef19004df7489794a0adaee68d285"};
-//        String s[] =  {"21e7133508c40bbdf2be8a7bdc35b7de0b618ae4"};
-//        String s[] =  {"6ef80072f39071d4118a6e7890e209d4dd07e504"};
-//        String s[] =  {"02285af8f969dc5c7b12be72fbce858997afe80a"};
-//        String s[] =  {"57864da96344366865dd7cade69467d811a7961b"};
+        String s[] =  {"c2543fff3bfa6f144c2f06a7de6cd10c0b650cae", //this 311 seconds
+                        "b47f363e2b430c0647f14deea3eced9b0ef300ce", //is 0 seconds
+                        "e74295bfc2ed0b52d40073e8ebad555100df1380",// very 316 seconds
+                        "0f7d0d088b6ea936fb25b477722d734706fe8b40",// a while
+                        "77cfc481d3e76b543daf39e7f9bf86be2e664959",
+                        "5cc48a1da13ad8cef1f5fad70ead8362aabc68a1",
+                        "4bcc3a95bdd9a11b28883290b03086e82af90212",
+                        "7302ba343c5ef19004df7489794a0adaee68d285",
+                        "21e7133508c40bbdf2be8a7bdc35b7de0b618ae4",
+                        "6ef80072f39071d4118a6e7890e209d4dd07e504",
+                        "02285af8f969dc5c7b12be72fbce858997afe80a",
+                        "57864da96344366865dd7cade69467d811a7961b"};
         
-        for(int i = 0; i < 1; i++) {
+        for(int i = 0; i < 12; i++) {
             timeStart();
             jTextArea1.append(bruteForceAlgo(s[i]));
             timeStop("showSec");
@@ -189,7 +189,7 @@ public class NewJFrame extends javax.swing.JFrame {
     
     public String bruteForceAlgo(String hash) {
 
-        String[] a ={" ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a",
+        String[] a ={"", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a",
                     "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
                     "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};//alphabet ​
         
@@ -200,15 +200,12 @@ public class NewJFrame extends javax.swing.JFrame {
                         for (int n1=0; n1<37; n1++) {
                             for (int n0=0; n0<37; n0++) {
                                 String possPass = a[n5]+a[n4]+a[n3]+a[n2]+ a[n1]+a[n0];
-                                
-                                possPass = possPass.replaceAll("\\s+","");
-
+//                                possPass = possPass.replaceAll("\\s+","");
                                 if (genHash(possPass).equals(hash)) {
                                     return possPass;
                                 }
-                                System.out.println(genHash(possPass));
-                                System.out.println(possPass);
-
+//                                System.out.println(genHash(possPass));
+//                                System.out.println(possPass);
                             }
                         }
                     }
