@@ -230,20 +230,12 @@ public class NewJFrame extends javax.swing.JFrame {
         str_recieved_digits = jTextField2.getText();
         
         //Verify the input is correct
-        if (!(str_recieved_digits.length() == 10 || str_recieved_digits.length() == 6)) {
+        if (str_recieved_digits.length() != 10) {
             jTextArea1.setText("Not correct length");
             return;
         } else if (!isNumeric(str_recieved_digits)){
             jTextArea1.setText("Input numbers please");
             return;
-        }
-        
-        if (str_recieved_digits.length() == 6) {
-            int_recieved_digits = generateParityBits(int_recieved_digits);
-            
-            for (int i = 0; i < 6; i++) {
-                jTextArea5.setText(Integer.toString(int_recieved_digits[i]));
-            }
         }
         
         //intialise array
@@ -281,6 +273,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }
         
+        //Set print out variables
         for (int i = 0; i < 4; i++) {
             digits += syndromes[i];
             digits += ", ";
@@ -300,6 +293,7 @@ public class NewJFrame extends javax.swing.JFrame {
             fixedCodeStr += fixedCode[i];
         }
 
+        //Print to textboxes
         jTextArea1.setText(Integer.toString(errorCount));
         jTextArea2.setText(digits);
         jTextArea3.setText(pqr);

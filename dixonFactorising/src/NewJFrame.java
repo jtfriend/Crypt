@@ -44,6 +44,12 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -52,24 +58,24 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(101, 101, 101)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
+                        .addGap(186, 186, 186)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
+                        .addGap(178, 178, 178)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addContainerGap(87, Short.MAX_VALUE)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
         );
 
@@ -78,12 +84,12 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int hold = Integer.parseInt(jTextField1.getText());
-        BigInteger number = new BigInteger(hold);
-        dixonFactorise(number);
-        
-        
+        dixonFactorise(new BigInteger(jTextField1.getText()));
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,13 +126,96 @@ public class NewJFrame extends javax.swing.JFrame {
         });
     }
     
-    public double dixonFactorise(BigInteger val) {
+    public void dixonFactorise(BigInteger val) {
+        
+        BigInteger a, n, b, c, poss, x, xSqrd;
+        n = val;
+        x = new BigInteger("0");
+        poss = new BigInteger("75");
+        xSqrd = new BigInteger("0");
+        b = new BigInteger("1");
+        
+        System.out.println(n);
+        
+        int smoothNums[] = {2,3,5,7};
+        int smoothCalcPow[] = {0,0,0,0};
+        
+        int i;
+        outerloop:
+        for (i = 0; i < 100000000; i++){
+            xSqrd = x.multiply(x);
+            System.out.println("start");
+            System.out.println(xSqrd);
+            poss = xSqrd.mod(n);
+            System.out.println(poss);
+            
+            for (int j = 0; j < 4 ; j++) {
+                for (int k = 0; k < 4 ; k++) {
+                    for (int l = 0; l < 4 ; l++) {
+                        for (int m = 0; m < 4 ; m++) {
+                            double num2 = Math.pow(smoothNums[0], m);
+                            double num3 = Math.pow(smoothNums[1], l);
+                            double num5 = Math.pow(smoothNums[2], k);
+                            double num7 = Math.pow(smoothNums[3], j);
+                    
+                            double calc = Math.pow(smoothNums[0], m) * 
+                                          Math.pow(smoothNums[1], l) *
+                                          Math.pow(smoothNums[2], k) *
+                                          Math.pow(smoothNums[3], j);
+//                            System.out.println(Double.toString(num2) + " x " +
+//                                               Double.toString(num3) + " x " + 
+//                                               Double.toString(num5) + " x " + 
+//                                               Double.toString(num7));
+                            int calcInt = (int) calc;
+//                            System.out.println(Integer.toString(calcInt));
+                            if ((BigInteger.valueOf(calcInt).equals(poss)) && ((m + l + k+ j) % 2 == 0)) {
+                                smoothCalcPow[0] = m;
+                                smoothCalcPow[1] = l;
+                                smoothCalcPow[2] = k;
+                                smoothCalcPow[3] = j;
+                                break outerloop;
+                            }
+                        }
+                    }
+                }
+            }
+
+            x = x.add(b);
+            System.out.println(x);
+        }
+        
+        
+        System.out.println("Poss");
+        System.out.println(poss);
+        printArray(smoothCalcPow);
+ 
         
         
         jTextArea1.append(String.valueOf(getIntSqrt(val)));
-        
-        return 0.0;
+
         //need to make struct to store a and possA;
+    }
+    
+    /*  printArray
+    * Params : int[] arr
+    * Returns : void
+    * Desc : prints array to terminal, useful for testing
+    */
+    public void printArray(int[] arr) {
+        for (int i = 0; i < (arr.length); i++) {
+            System.out.println(arr[i]);
+        }
+    }
+    
+    public Boolean PerfectSquare(BigInteger A) {
+        Boolean p = false;
+        BigInteger B = getIntSqrt(A);
+        BigInteger C = B.multiply(B);
+        if (C.equals(A)){
+            p = true;
+        }
+        
+        return p;
     }
     
     public BigInteger getIntSqrt(BigInteger x){

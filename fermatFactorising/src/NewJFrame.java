@@ -85,7 +85,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-//        fermatFactorise(Integer.parseInt(jTextField1.getText()));
+//        fermatFactorise(new BigInteger(jTextField1.getText()));
         String s[] =  {"224573", //this 311 seconds
                         "299203", //is 0 seconds
                         "1963867",// very 316 seconds
@@ -93,20 +93,21 @@ public class NewJFrame extends javax.swing.JFrame {
                         "14674291",
                         "23128513",
                         "254855791",
-                        "428279361"};
-//                        "159649552547",
-//                        "189061250479",
-//                        "2211744201787",
-//                        "7828669742987",
-//                        "48560209712519",
-//                        "35872004189003",
-//                        "737785058178599",
-//                        "576460921650883",
-//                        "1957432135202107",
-//                        "2450609331732137"};
+                        "428279361",
+                        "159649552547",
+                        "189061250479",
+                        "2211744201787",
+                        "7828669742987",
+                        "48560209712519",
+                        "35872004189003",
+                        "737785058178599",
+                        "576460921650883",
+                        "1957432135202107",
+                        "2450609331732137"};
         
-        for(int i = 0; i < 8; i++) {
-            fermatFactorise(Integer.parseInt(s[i]));
+        for(int i = 0; i < 18; i++) {
+//            fermatFactorise(BigInteger.parseInt(s[i]));
+            fermatFactorise(new BigInteger(s[i]));
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -145,40 +146,48 @@ public class NewJFrame extends javax.swing.JFrame {
         });
     }
     
-    public double fermatFactorise(long val) {
+    public void fermatFactorise(BigInteger val) {
+          
         jTextArea1.append(String.valueOf(val) + " = ");
-        long a = (long)(Math.sqrt(val)) + 1;
-        System.out.println("starting ^2 " + a);
-        double possA = 0;
-        double x = 0;
+        BigInteger a, n, b, c, possSquare, x;
+        
+        b = new BigInteger("1");
+        n = val;
+        a = getIntSqrt(n).add(b);
+        
+        possSquare = new BigInteger("0");
+        x = new BigInteger("0");
         int i;
-        for (i= 0; i < 100000; i++){
-            System.out.println("a: " + a); 
-            System.out.println("diff" + ((a*a) - val));
-            possA = Math.sqrt((a*a) - val);
-            x = Math.floor(possA);
-            System.out.println("possA" + possA);
-            if (possA - x == 0) {
-                System.out.println("found");
+        for (i= 0; i < 100000000; i++){
+            possSquare = a.multiply(a);
+            possSquare = possSquare.subtract(n);
+            
+            if (PerfectSquare(possSquare)) {
+                possSquare = getIntSqrt(possSquare);
                 break;
             } else {
-                System.out.println("not found");
             }
-            a++;
+            a = a.add(b);
         }
-        long factorA = a - (long)possA;
-        long factorB = a + (long)possA;
+        BigInteger factorA = a.subtract(possSquare);
+        BigInteger factorB = a.add(possSquare);
         jTextArea1.append(String.valueOf(factorA) + " x " + String.valueOf(factorB) + "\n");
-        
-        return possA;
-        //need to make struct to store a and possA;
+
     }
     
+    public Boolean PerfectSquare(BigInteger A) {
+        Boolean p = false;
+        BigInteger B = getIntSqrt(A);
+        BigInteger C = B.multiply(B);
+        if (C.equals(A)){
+            p = true;
+        }
+        
+        return p;
+    }
+
     
-    
-    
-    
-    BigInteger getIntSqrt(BigInteger x){
+    public BigInteger getIntSqrt(BigInteger x){
         BigInteger s; // final result 
         BigInteger currentRes = BigInteger.valueOf(0); // init value is 0
         BigInteger currentSum = BigInteger.valueOf(0); // init value is 0
