@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.math.BigInteger; 
+import java.math.BigInteger;
+import java.util.*;
 /**
  *
  * @author jt2-friend
@@ -130,7 +131,8 @@ public class NewJFrame extends javax.swing.JFrame {
         
         BigInteger a, n, b, c, poss, x, xSqrd;
         n = val;
-        x = new BigInteger("0");
+        
+        x = new BigInteger(String.valueOf(getIntSqrt(val)));
         poss = new BigInteger("75");
         xSqrd = new BigInteger("0");
         b = new BigInteger("1");
@@ -139,8 +141,12 @@ public class NewJFrame extends javax.swing.JFrame {
         
         int smoothNums[] = {2,3,5,7};
         int smoothCalcPow[] = {0,0,0,0};
+//        List possSmooth = new ArrayList();
+        List<List<String>> possSmoothList = new ArrayList<List<String>>(); 
+        List<String> possSmoothSet = null;
         
         int i;
+        int countNumOfValues = 0;
         outerloop:
         for (i = 0; i < 100000000; i++){
             xSqrd = x.multiply(x);
@@ -149,32 +155,46 @@ public class NewJFrame extends javax.swing.JFrame {
             poss = xSqrd.mod(n);
             System.out.println(poss);
             
-            for (int j = 0; j < 4 ; j++) {
-                for (int k = 0; k < 4 ; k++) {
-                    for (int l = 0; l < 4 ; l++) {
-                        for (int m = 0; m < 4 ; m++) {
-                            double num2 = Math.pow(smoothNums[0], m);
-                            double num3 = Math.pow(smoothNums[1], l);
-                            double num5 = Math.pow(smoothNums[2], k);
-                            double num7 = Math.pow(smoothNums[3], j);
-                    
-                            double calc = Math.pow(smoothNums[0], m) * 
-                                          Math.pow(smoothNums[1], l) *
-                                          Math.pow(smoothNums[2], k) *
-                                          Math.pow(smoothNums[3], j);
+            for (int sevenPow = 0; sevenPow < 4 ; sevenPow++) {
+                for (int fivePow = 0; fivePow < 4 ; fivePow++) {
+                    for (int threePow = 0; threePow < 4 ; threePow++) {
+                        for (int twoPow = 0; twoPow < 4 ; twoPow++) {
+//                            double num2 = Math.pow(smoothNums[0], twoPow);
+//                            double num3 = Math.pow(smoothNums[1], threePow);
+//                            double num5 = Math.pow(smoothNums[2], fivePow);
+//                            double num7 = Math.pow(smoothNums[3], sevenPow);
+                            double calc = Math.pow(smoothNums[0], twoPow) * 
+                                          Math.pow(smoothNums[1], threePow) *
+                                          Math.pow(smoothNums[2], fivePow) *
+                                          Math.pow(smoothNums[3], sevenPow);
 //                            System.out.println(Double.toString(num2) + " x " +
 //                                               Double.toString(num3) + " x " + 
 //                                               Double.toString(num5) + " x " + 
 //                                               Double.toString(num7));
                             int calcInt = (int) calc;
 //                            System.out.println(Integer.toString(calcInt));
-                            if ((BigInteger.valueOf(calcInt).equals(poss)) && ((m + l + k+ j) % 2 == 0)) {
-                                smoothCalcPow[0] = m;
-                                smoothCalcPow[1] = l;
-                                smoothCalcPow[2] = k;
-                                smoothCalcPow[3] = j;
-                                break outerloop;
+                            if (BigInteger.valueOf(calcInt).equals(poss)) {
+                                possSmoothSet.add(String.valueOf(twoPow) +
+                                               String.valueOf(threePow) +
+                                               String.valueOf(fivePow) +
+                                               String.valueOf(sevenPow));
+                                possSmoothList.add(possSmoothSet);
+//                                    smoothCalcPow[0] = twoPow;
+//                                    smoothCalcPow[1] = threePow;
+//                                    smoothCalcPow[2] = fivePow;
+//                                    smoothCalcPow[3] = sevenPow;
+//                                    break outerloop;
                             }
+                            for (int m = 0; m < possSmoothList.size(); m++) {
+                                int powerTotal = Integer.valueOf(possSmoothList.get(m).get(0)) +
+                                                 Integer.valueOf(possSmoothList.get(m).get(1)) +
+                                                 Integer.valueOf(possSmoothList.get(m).get(2)) +
+                                                 Integer.valueOf(possSmoothList.get(m).get(3));
+                                if (powerTotal % 2 == 0) {
+                                    
+                                }
+                            }
+                            
                         }
                     }
                 }
@@ -187,6 +207,7 @@ public class NewJFrame extends javax.swing.JFrame {
         
         System.out.println("Poss");
         System.out.println(poss);
+        System.out.println(possSmooth);
         printArray(smoothCalcPow);
  
         
