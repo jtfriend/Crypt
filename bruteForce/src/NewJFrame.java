@@ -63,23 +63,25 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String s[] =  {"c2543fff3bfa6f144c2f06a7de6cd10c0b650cae", //this 311 seconds
-                        "b47f363e2b430c0647f14deea3eced9b0ef300ce", //is 0 seconds
-                        "e74295bfc2ed0b52d40073e8ebad555100df1380",// very 316 seconds
-                        "0f7d0d088b6ea936fb25b477722d734706fe8b40",// a while
-                        "77cfc481d3e76b543daf39e7f9bf86be2e664959",
-                        "5cc48a1da13ad8cef1f5fad70ead8362aabc68a1",
-                        "4bcc3a95bdd9a11b28883290b03086e82af90212",
-                        "7302ba343c5ef19004df7489794a0adaee68d285",
-                        "21e7133508c40bbdf2be8a7bdc35b7de0b618ae4",
-                        "6ef80072f39071d4118a6e7890e209d4dd07e504",
-                        "02285af8f969dc5c7b12be72fbce858997afe80a",
-                        "57864da96344366865dd7cade69467d811a7961b"};
+        String s[] = {
+              "c2543fff3bfa6f144c2f06a7de6cd10c0b650cae" //this 18 seconds 18512 milliseconds
+//            "b47f363e2b430c0647f14deea3eced9b0ef300ce" //is 0 seconds 10 milliseconds
+//            "e74295bfc2ed0b52d40073e8ebad555100df1380" // very 19 seconds 19103 milliseconds
+//            "0f7d0d088b6ea936fb25b477722d734706fe8b40" // a while
+//            "77cfc481d3e76b543daf39e7f9bf86be2e664959" // fail7 362 seconds 362935 milliseconds
+//            "5cc48a1da13ad8cef1f5fad70ead8362aabc68a1"    //5you5 153 seconds 153288 milliseconds
+//            "4bcc3a95bdd9a11b28883290b03086e82af90212"   //3crack 3610 seconds3610411milliseconds
+//            "7302ba343c5ef19004df7489794a0adaee68d285" //1you1 64 seconds64347milliseconds
+//            "21e7133508c40bbdf2be8a7bdc35b7de0b618ae4"   //00if00 863 seconds863863milliseconds
+//            "6ef80072f39071d4118a6e7890e209d4dd07e504"
+//            "02285af8f969dc5c7b12be72fbce858997afe80a"
+//            "57864da96344366865dd7cade69467d811a7961b"
+        };
         
-        for(int i = 0; i < 12; i++) {
+        for(int i = 0; i < 1; i++) {
             timeStart();
             jTextArea1.append(bruteForceAlgo(s[i]));
-            timeStop("showSec");
+            timeStop("showTime");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -100,15 +102,17 @@ public class NewJFrame extends javax.swing.JFrame {
         String[] a ={"", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a",
                     "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
                     "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};//alphabet ​
+        System.out.println("Started");
         
         for (int n5=0; n5<37; n5++) {
+            
             for (int n4=0; n4<37; n4++) {
                 for (int n3=0; n3<37; n3++) {
                     for (int n2=0; n2<37; n2++) {
                         for (int n1=0; n1<37; n1++) {
                             for (int n0=0; n0<37; n0++) {
                                 String possPass = a[n5]+a[n4]+a[n3]+a[n2]+ a[n1]+a[n0];
-
+                                
                                 if (genHash(possPass).equals(hash)) {
                                     return possPass;
                                 }
@@ -117,6 +121,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     }
                 }
             }
+            
         }
 
         return "Failed";
@@ -130,13 +135,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
     void timeStop(String s) {
         timer = System.currentTimeMillis() - timer;
-        if(s.equals("showMs") || s.equals("")) 
-            System.out.println("Time taken is " + timer + "  milliseconds");
-        else if(s.equals("showSec"))
-            jTextArea1.append("Time taken is " + timer/1000 + " seconds\n");
-        else if(s.equals("showMin")) {
-            System.out.println("Time taken is " + timer/60000 + " munites and "
-                    + (timer%60000)/1000 + " seconds");
+        if(s.equals("showTime")) {
+            jTextArea1.append("Time taken is " + timer/1000 + " seconds" + timer +"milliseconds\n");
         }
     } 
     

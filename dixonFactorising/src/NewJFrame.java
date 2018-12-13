@@ -84,8 +84,33 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        timeStart();
         dixonFactorise(new BigInteger(jTextField1.getText()));
+        timeStop("showTime");
+//        String s[] =  {"224573",
+//                        "299203",
+//                        "1963867",
+//                        "6207251",
+//                        "14674291",
+//                        "23128513",
+//                        "254855791",
+//                        "428279361",
+//                        "159649552547",
+//                        "189061250479",
+//                        "2211744201787",
+//                        "7828669742987",
+//                        "48560209712519",
+//                        "35872004189003",
+//                        "737785058178599",
+//                        "576460921650883",
+//                        "1957432135202107",
+//                        "2450609331732137"};
+//      
+//        for(int i = 0; i < 18; i++) {
+//            timeStart();
+//            dixonFactorise(new BigInteger(s[i]));
+//            timeStop("showTime");
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -127,94 +152,147 @@ public class NewJFrame extends javax.swing.JFrame {
         });
     }
     
+    //dixonFactorise
+    //Params  : BigInteger val
+    //Returns : void
+    //Desc    : Factorises an input value with Dixon Algorithm
     public void dixonFactorise(BigInteger val) {
         
-        BigInteger a, n, b, c, poss, x, xSqrd;
+        BigInteger n, b, poss, x, xSqrd;
         n = val;
         
         x = new BigInteger(String.valueOf(getIntSqrt(val)));
-        poss = new BigInteger("75");
-        xSqrd = new BigInteger("0");
         b = new BigInteger("1");
-        
-        System.out.println(n);
+        x = x.add(b);
         
         int smoothNums[] = {2,3,5,7};
-        int smoothCalcPow[] = {0,0,0,0};
-//        List possSmooth = new ArrayList();
-        List<List<String>> possSmoothList = new ArrayList<List<String>>(); 
-        List<String> possSmoothSet = null;
+        int smoothCalcPowSet1[] = {0,0,0,0};
+        int smoothCalcPowSet2[] = {0,0,0,0};
+
+        List<String> possSmoothList = new ArrayList<String>();
+        List<String> xSet = new ArrayList<String>();
         
-        int i;
-        int countNumOfValues = 0;
         outerloop:
-        for (i = 0; i < 100000000; i++){
+        for (int i = 0; i < 100000000; i++){
             xSqrd = x.multiply(x);
-            System.out.println("start");
-            System.out.println(xSqrd);
             poss = xSqrd.mod(n);
-            System.out.println(poss);
-            
-            for (int sevenPow = 0; sevenPow < 4 ; sevenPow++) {
-                for (int fivePow = 0; fivePow < 4 ; fivePow++) {
-                    for (int threePow = 0; threePow < 4 ; threePow++) {
-                        for (int twoPow = 0; twoPow < 4 ; twoPow++) {
-//                            double num2 = Math.pow(smoothNums[0], twoPow);
-//                            double num3 = Math.pow(smoothNums[1], threePow);
-//                            double num5 = Math.pow(smoothNums[2], fivePow);
-//                            double num7 = Math.pow(smoothNums[3], sevenPow);
+            innerloop:
+            //loop through to find all 7 smooth numbers
+            for (int sevenPow = 0; sevenPow < 10 ; sevenPow++) {
+                for (int fivePow = 0; fivePow < 10 ; fivePow++) {
+                    for (int threePow = 0; threePow < 10 ; threePow++) {
+                        for (int twoPow = 0; twoPow < 10 ; twoPow++) {
+                            //Calculate value of smooth 7 number
                             double calc = Math.pow(smoothNums[0], twoPow) * 
                                           Math.pow(smoothNums[1], threePow) *
                                           Math.pow(smoothNums[2], fivePow) *
                                           Math.pow(smoothNums[3], sevenPow);
-//                            System.out.println(Double.toString(num2) + " x " +
-//                                               Double.toString(num3) + " x " + 
-//                                               Double.toString(num5) + " x " + 
-//                                               Double.toString(num7));
+                            
                             int calcInt = (int) calc;
-//                            System.out.println(Integer.toString(calcInt));
+                            //if smooth number is equal to x^2 mod n ...add to list of possible powers
                             if (BigInteger.valueOf(calcInt).equals(poss)) {
-                                possSmoothSet.add(String.valueOf(twoPow) +
+                                possSmoothList.add(String.valueOf(twoPow) +
                                                String.valueOf(threePow) +
                                                String.valueOf(fivePow) +
                                                String.valueOf(sevenPow));
-                                possSmoothList.add(possSmoothSet);
-//                                    smoothCalcPow[0] = twoPow;
-//                                    smoothCalcPow[1] = threePow;
-//                                    smoothCalcPow[2] = fivePow;
-//                                    smoothCalcPow[3] = sevenPow;
-//                                    break outerloop;
-                            }
-                            for (int m = 0; m < possSmoothList.size(); m++) {
-                                int powerTotal = Integer.valueOf(possSmoothList.get(m).get(0)) +
-                                                 Integer.valueOf(possSmoothList.get(m).get(1)) +
-                                                 Integer.valueOf(possSmoothList.get(m).get(2)) +
-                                                 Integer.valueOf(possSmoothList.get(m).get(3));
-                                if (powerTotal % 2 == 0) {
-                                    
+                                xSet.add(String.valueOf(x));
+                                
+                                if (possSmoothList.size() > 1) {
+                                    //loop through the list to and compare
+                                    for (int m = 0; m < possSmoothList.size(); m++) {
+                                            int pow2Init = Character.getNumericValue(Integer.valueOf(possSmoothList.get(m).charAt(0)));
+                                            int pow3Init = Character.getNumericValue(Integer.valueOf(possSmoothList.get(m).charAt(1)));
+                                            int pow5Init = Character.getNumericValue(Integer.valueOf(possSmoothList.get(m).charAt(2)));
+                                            int pow7Init = Character.getNumericValue(Integer.valueOf(possSmoothList.get(m).charAt(3)));
+                                            int x1Poss = Integer.valueOf(xSet.get(m));
+                                        for (int l = m+1; l < possSmoothList.size(); l++) {
+                                            int pow2ToComp = Character.getNumericValue(Integer.valueOf(possSmoothList.get(l).charAt(0)));
+                                            int pow3ToComp = Character.getNumericValue(Integer.valueOf(possSmoothList.get(l).charAt(1)));
+                                            int pow5ToComp = Character.getNumericValue(Integer.valueOf(possSmoothList.get(l).charAt(2)));
+                                            int pow7ToComp = Character.getNumericValue(Integer.valueOf(possSmoothList.get(l).charAt(3)));
+                                            int x2Poss = Integer.valueOf(xSet.get(l));
+                                            //if powers add to give even outcomes
+                                            if (((pow2Init + pow2ToComp) % 2 == 0) &&
+                                                ((pow3Init + pow3ToComp) % 2 == 0) &&
+                                                ((pow5Init + pow5ToComp) % 2 == 0) &&
+                                                ((pow7Init + pow7ToComp) % 2 == 0)) {
+                                                
+                                                smoothCalcPowSet1[0] = pow2Init;
+                                                smoothCalcPowSet1[1] = pow3Init;
+                                                smoothCalcPowSet1[2] = pow5Init;
+                                                smoothCalcPowSet1[3] = pow7Init;
+                                                
+                                                smoothCalcPowSet2[0] = pow2ToComp;
+                                                smoothCalcPowSet2[1] = pow3ToComp;
+                                                smoothCalcPowSet2[2] = pow5ToComp;
+                                                smoothCalcPowSet2[3] = pow7ToComp;
+                                                //check if the factors are correct
+                                                if (checkFactorsAreCorrect(smoothNums, smoothCalcPowSet1, smoothCalcPowSet2,  x1Poss, x2Poss, n)) {
+                                                    break outerloop;
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
-                            }
-                            
+                            } 
                         }
                     }
                 }
             }
 
             x = x.add(b);
-            System.out.println(x);
         }
-        
-        
-        System.out.println("Poss");
-        System.out.println(poss);
-        System.out.println(possSmooth);
-        printArray(smoothCalcPow);
- 
-        
-        
-        jTextArea1.append(String.valueOf(getIntSqrt(val)));
+    }
+    
+    
+    long timer = 0;
 
-        //need to make struct to store a and possA;
+    void timeStart() {
+        timer = System.currentTimeMillis();
+    }
+
+    void timeStop(String s) {
+        timer = System.currentTimeMillis() - timer;
+        if(s.equals("showTime")) {
+            jTextArea1.append("Time taken is " + timer/1000 + " seconds" + timer +"milliseconds\n");
+        }
+    } 
+    
+    //checkFactorsAreCorrect
+    //Params  : int[] smoothNums, int[] smoothCalcPowSet1, int[] smoothCalcPowSet2, int x1, int x2, BigInteger n
+    //Returns : bool
+    //Desc    : Calculates gcd to find factors of value n
+    public boolean checkFactorsAreCorrect(int[] smoothNums, int[] smoothCalcPowSet1, int[] smoothCalcPowSet2, int x1, int x2, BigInteger n) {
+        int gcd = 1;
+        BigInteger BigFactor1, BigFactor2;
+        int smoothCalcPow[] = {0,0,0,0};
+        
+        //calculate x
+        int x = x1 * x2;
+        
+        //Add powers of values
+        for (int i = 0; i < 4 ; i++) {
+            smoothCalcPow[i] = smoothCalcPowSet1[i] + smoothCalcPowSet2[i];
+        }
+
+        //Squareroot the value
+        for (int i = 0; i < 4 ; i++) {
+            gcd *= (int)Math.sqrt(Math.pow(smoothNums[i], (smoothCalcPow[i])));
+        }
+
+        //Generate factors before gcd
+        BigFactor1 = BigInteger.valueOf(x - gcd);
+        BigFactor2 = BigInteger.valueOf(x + gcd);
+        
+        //Use Greatest common divisor to calculate final factors
+        BigFactor1 = BigFactor1.gcd(n);
+        BigFactor2 = BigFactor2.gcd(n);
+        
+        //print factors
+        System.out.println("Factor 1 : " + BigFactor1);
+        System.out.println("Factor 2 : " + BigFactor2);
+        
+        return true;
     }
     
     /*  printArray
@@ -227,8 +305,12 @@ public class NewJFrame extends javax.swing.JFrame {
             System.out.println(arr[i]);
         }
     }
-    
-    public Boolean PerfectSquare(BigInteger A) {
+
+    //perfectSquare
+    //Params  : BigInteger A
+    //Returns : BigInteger
+    //Desc    : Checks if value inputted is a square number
+    public Boolean perfectSquare(BigInteger A) {
         Boolean p = false;
         BigInteger B = getIntSqrt(A);
         BigInteger C = B.multiply(B);
@@ -238,12 +320,18 @@ public class NewJFrame extends javax.swing.JFrame {
         
         return p;
     }
+
+    /*Source: Blackboard -> Learning materials*/
+    //getIntSqrt
+    //Params  : BigInteger x
+    //Returns : BigInteger
+    //Desc    : squareroots big integers
     
     public BigInteger getIntSqrt(BigInteger x){
         BigInteger s; // final result 
         BigInteger currentRes = BigInteger.valueOf(0); // init value is 0
         BigInteger currentSum = BigInteger.valueOf(0); // init value is 0
-        BigInteger sum = BigInteger.valueOf(0);
+        BigInteger sum;
         String xS = x.toString(); // change input x to a string xS
        
         int lengthOfxS = xS.length();

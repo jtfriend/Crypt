@@ -84,31 +84,33 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-//        fermatFactorise(new BigInteger(jTextField1.getText()));
-        String s[] =  {"224573", //this 311 seconds
-                        "299203", //is 0 seconds
-                        "1963867",// very 316 seconds
-                        "6207251",// a while
-                        "14674291",
-                        "23128513",
-                        "254855791",
-                        "428279361",
-                        "159649552547",
-                        "189061250479",
-                        "2211744201787",
-                        "7828669742987",
-                        "48560209712519",
-                        "35872004189003",
-                        "737785058178599",
-                        "576460921650883",
-                        "1957432135202107",
-                        "2450609331732137"};
-        
-        for(int i = 0; i < 18; i++) {
-//            fermatFactorise(BigInteger.parseInt(s[i]));
-            fermatFactorise(new BigInteger(s[i]));
-        }
+        timeStart();
+        fermatFactorise(new BigInteger(jTextField1.getText()));
+        timeStop("showTime");
+//        String s[] =  {"224573",
+//                        "299203",
+//                        "1963867",
+//                        "6207251",
+//                        "14674291",
+//                        "23128513",
+//                        "254855791",
+//                        "428279361",
+//                        "159649552547",
+//                        "189061250479",
+//                        "2211744201787",
+//                        "7828669742987",
+//                        "48560209712519",
+//                        "35872004189003",
+//                        "737785058178599",
+//                        "576460921650883",
+//                        "1957432135202107",
+//                        "2450609331732137"};
+//      
+//        for(int i = 0; i < 18; i++) {
+//            timeStart();
+//            fermatFactorise(new BigInteger(s[i]));
+//            timeStop("showTime");
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -146,6 +148,24 @@ public class NewJFrame extends javax.swing.JFrame {
         });
     }
     
+    long timer = 0;
+
+    void timeStart() {
+        timer = System.currentTimeMillis();
+    }
+
+    void timeStop(String s) {
+        timer = System.currentTimeMillis() - timer;
+        if(s.equals("showTime")) {
+            jTextArea1.append("=> " + timer/1000 + " secs " + timer +"ms\n");
+        }
+    }
+    
+    //fermatFactorise
+    //Params  : BigInteger val
+    //Returns : void
+    //Desc    : Factorises an input value with Fermat Algorithm
+    //          n = (a^2 - b^2)
     public void fermatFactorise(BigInteger val) {
           
         jTextArea1.append(String.valueOf(val) + " = ");
@@ -153,29 +173,38 @@ public class NewJFrame extends javax.swing.JFrame {
         
         b = new BigInteger("1");
         n = val;
+        //squareroot input val + 1
         a = getIntSqrt(n).add(b);
         
         possSquare = new BigInteger("0");
         x = new BigInteger("0");
-        int i;
-        for (i= 0; i < 100000000; i++){
+
+        for (int i= 0; i < 100000000; i++){
+            //square a
             possSquare = a.multiply(a);
+            //subtract n
             possSquare = possSquare.subtract(n);
             
-            if (PerfectSquare(possSquare)) {
+            //check is possSquare is a square number
+            if (perfectSquare(possSquare)) {
                 possSquare = getIntSqrt(possSquare);
                 break;
-            } else {
             }
+            //if not square try the next value
             a = a.add(b);
         }
+        //Generate factors from square number
         BigInteger factorA = a.subtract(possSquare);
         BigInteger factorB = a.add(possSquare);
         jTextArea1.append(String.valueOf(factorA) + " x " + String.valueOf(factorB) + "\n");
 
     }
     
-    public Boolean PerfectSquare(BigInteger A) {
+    //perfectSquare
+    //Params  : BigInteger A
+    //Returns : BigInteger
+    //Desc    : Checks if value inputted is a square number
+    public Boolean perfectSquare(BigInteger A) {
         Boolean p = false;
         BigInteger B = getIntSqrt(A);
         BigInteger C = B.multiply(B);
@@ -186,7 +215,11 @@ public class NewJFrame extends javax.swing.JFrame {
         return p;
     }
 
-    
+    /*Source: Blackboard -> Learning materials*/
+    //getIntSqrt
+    //Params  : BigInteger x
+    //Returns : BigInteger
+    //Desc    : squareroots big integers
     public BigInteger getIntSqrt(BigInteger x){
         BigInteger s; // final result 
         BigInteger currentRes = BigInteger.valueOf(0); // init value is 0
@@ -223,22 +256,7 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         s = currentRes.divide(BigInteger.valueOf(10)); // go one step back
         return s;
-
-}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
